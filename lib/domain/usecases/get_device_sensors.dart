@@ -7,7 +7,7 @@ class GetDeviceSensors {
 
   GetDeviceSensors(this.repository);
 
-  Future<ResultFuture<List<DeviceSensor>>> call() async {
+  ResultFuture<List<DeviceSensor>> call() async {
     return await repository.getDeviceSensors();
   }
 }

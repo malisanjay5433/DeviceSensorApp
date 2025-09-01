@@ -2,6 +2,7 @@ import 'package:devicesensorapp/core/errors/failures.dart';
 import 'package:devicesensorapp/core/network/network_info.dart';
 import 'package:devicesensorapp/core/utils/typedefs.dart';
 import 'package:devicesensorapp/data/datasources/device_sensor_remote_datasource.dart';
+import 'package:devicesensorapp/data/models/device_sensor_model.dart';
 import 'package:devicesensorapp/domain/entities/device_sensor.dart';
 import 'package:devicesensorapp/domain/repositories/device_sensor_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -16,7 +17,7 @@ class DeviceSensorRepositoryImpl implements DeviceSensorRepository {
   });
 
   @override
-  Future<ResultFuture<List<DeviceSensor>>> getDeviceSensors() async {
+  ResultFuture<List<DeviceSensor>> getDeviceSensors() async {
     if (await networkInfo.isConnected) {
       try {
         final remoteSensors = await remoteDataSource.getDeviceSensors();
@@ -30,7 +31,7 @@ class DeviceSensorRepositoryImpl implements DeviceSensorRepository {
   }
 
   @override
-  Future<ResultFuture<DeviceSensor>> getDeviceSensorById(String id) async {
+  ResultFuture<DeviceSensor> getDeviceSensorById(String id) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteSensor = await remoteDataSource.getDeviceSensorById(id);
@@ -44,7 +45,7 @@ class DeviceSensorRepositoryImpl implements DeviceSensorRepository {
   }
 
   @override
-  Future<ResultFuture<DeviceSensor>> updateDeviceSensor(DeviceSensor sensor) async {
+  ResultFuture<DeviceSensor> updateDeviceSensor(DeviceSensor sensor) async {
     if (await networkInfo.isConnected) {
       try {
         final sensorModel = DeviceSensorModel.fromEntity(sensor);
@@ -59,7 +60,7 @@ class DeviceSensorRepositoryImpl implements DeviceSensorRepository {
   }
 
   @override
-  Future<ResultFuture<void>> deleteDeviceSensor(String id) async {
+  ResultFuture<void> deleteDeviceSensor(String id) async {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.deleteDeviceSensor(id);
@@ -73,7 +74,7 @@ class DeviceSensorRepositoryImpl implements DeviceSensorRepository {
   }
 
   @override
-  Future<ResultFuture<DeviceSensor>> createDeviceSensor(DeviceSensor sensor) async {
+  ResultFuture<DeviceSensor> createDeviceSensor(DeviceSensor sensor) async {
     if (await networkInfo.isConnected) {
       try {
         final sensorModel = DeviceSensorModel.fromEntity(sensor);

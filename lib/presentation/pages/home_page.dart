@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devicesensorapp/presentation/providers/device_sensor_provider.dart';
 import 'package:devicesensorapp/presentation/widgets/device_sensor_card.dart';
 import 'package:devicesensorapp/presentation/widgets/loading_widget.dart';
-import 'package:devicesensorapp/presentation/widgets/error_widget.dart';
+import 'package:devicesensorapp/presentation/widgets/error_widget.dart' as custom;
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -43,7 +43,7 @@ class HomePage extends ConsumerWidget {
                 ),
               ),
         loading: () => const LoadingWidget(),
-        error: (error, stackTrace) => ErrorWidget(
+        error: (error, stackTrace) => custom.ErrorWidget(
           error: error.toString(),
           onRetry: () => ref.read(deviceSensorNotifierProvider.notifier).refreshSensors(),
         ),

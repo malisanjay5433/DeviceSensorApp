@@ -2,9 +2,9 @@ import 'package:devicesensorapp/core/utils/typedefs.dart';
 import 'package:devicesensorapp/domain/entities/device_sensor.dart';
 
 abstract class DeviceSensorRepository {
-  Future<ResultFuture<List<DeviceSensor>>> getDeviceSensors();
-  Future<ResultFuture<DeviceSensor>> getDeviceSensorById(String id);
-  Future<ResultFuture<DeviceSensor>> updateDeviceSensor(DeviceSensor sensor);
-  Future<ResultFuture<void>> deleteDeviceSensor(String id);
-  Future<ResultFuture<DeviceSensor>> createDeviceSensor(DeviceSensor sensor);
+  ResultFuture<List<DeviceSensor>> getDeviceSensors();
+  ResultFuture<DeviceSensor> getDeviceSensorById(String id);
+  ResultFuture<DeviceSensor> updateDeviceSensor(DeviceSensor sensor);
+  ResultFuture<void> deleteDeviceSensor(String id);
+  ResultFuture<DeviceSensor> createDeviceSensor(DeviceSensor sensor);
 }

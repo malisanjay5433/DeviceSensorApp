@@ -1,6 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:battery_plus/battery_plus.dart';
-import 'package:devicesensorapp/data/models/device_info_model.dart';
 import 'package:devicesensorapp/domain/entities/device_info.dart';
 import 'dart:io';
 

@@ -115,7 +115,7 @@ class DashboardPage extends ConsumerWidget {
                 DeviceInfoCard(
                   title: 'Platform',
                   value: deviceInfo.platform,
-                  icon: Icons.platform,
+                  icon: Icons.computer,
                   color: Colors.orange,
                 ),
                 const SizedBox(height: 12),

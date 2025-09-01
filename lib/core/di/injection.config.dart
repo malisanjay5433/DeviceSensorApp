@@ -8,18 +8,24 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:devicesensorapp/core/di/injection.dart' as _i11;
-import 'package:devicesensorapp/core/network/network_info.dart' as _i10;
+import 'package:devicesensorapp/core/di/injection.dart' as _i14;
+import 'package:devicesensorapp/core/network/network_info.dart' as _i11;
 import 'package:devicesensorapp/data/datasources/device_info_datasource.dart'
     as _i3;
 import 'package:devicesensorapp/data/datasources/device_sensor_remote_datasource.dart'
     as _i5;
+import 'package:devicesensorapp/data/datasources/sensor_datasource.dart'
+    as _i12;
 import 'package:devicesensorapp/domain/repositories/device_info_repository.dart'
     as _i4;
 import 'package:devicesensorapp/domain/repositories/device_sensor_repository.dart'
     as _i6;
+import 'package:devicesensorapp/domain/repositories/sensor_repository.dart'
+    as _i13;
 import 'package:devicesensorapp/domain/usecases/get_device_info.dart' as _i8;
 import 'package:devicesensorapp/domain/usecases/get_device_sensors.dart' as _i9;
+import 'package:devicesensorapp/domain/usecases/get_flashlight_state.dart'
+    as _i10;
 import 'package:dio/dio.dart' as _i7;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -48,9 +54,17 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i8.GetDeviceInfo>(() => registerModule.getDeviceInfo);
     gh.lazySingleton<_i9.GetDeviceSensors>(
         () => registerModule.getDeviceSensors);
-    gh.lazySingleton<_i10.NetworkInfo>(() => registerModule.networkInfo);
+    gh.lazySingleton<_i10.GetFlashlightState>(
+        () => registerModule.getFlashlightState);
+    gh.lazySingleton<_i11.NetworkInfo>(() => registerModule.networkInfo);
+    gh.lazySingleton<_i12.SensorDataSource>(
+        () => registerModule.sensorDataSource);
+    gh.lazySingleton<_i13.SensorRepository>(
+        () => registerModule.sensorRepository);
+    gh.lazySingleton<_i10.ToggleFlashlight>(
+        () => registerModule.toggleFlashlight);
     return this;
   }
 }
 
-class _$RegisterModule extends _i11.RegisterModule {}
+class _$RegisterModule extends _i14.RegisterModule {}

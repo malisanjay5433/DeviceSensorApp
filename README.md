@@ -62,6 +62,38 @@ A Flutter application that demonstrates native platform integration using Method
    flutter run
    ```
 
+## 📱 Download APK
+
+### Quick Build Script
+Use the provided build script to create a debug APK:
+
+```bash
+# Make script executable (first time only)
+chmod +x build_apk.sh
+
+# Build APK
+./build_apk.sh
+```
+
+The APK will be created at: `build/app/outputs/flutter-apk/app-debug.apk`
+
+### Manual Build
+```bash
+# Clean and build
+flutter clean
+flutter pub get
+flutter packages pub run build_runner build
+flutter build apk --debug
+```
+
+### Installation
+1. Transfer the APK to your Android device
+2. Enable "Unknown Sources" in Settings > Security
+3. Tap the APK file to install
+4. Grant camera permission when prompted
+
+**Note**: Flashlight control only works on physical devices with camera support.
+
 ### iOS Setup
 
 If you encounter iOS build issues:

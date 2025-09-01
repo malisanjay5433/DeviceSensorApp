@@ -11,9 +11,9 @@ class SensorDataSourceImpl implements SensorDataSource {
   Future<FlashlightState> getFlashlightState() async {
     try {
       final isAvailable = await TorchLight.isTorchAvailable();
-      final isOn = await TorchLight.isTorchOn();
+      // For torch_light, we'll assume it's off initially and track state manually
       return FlashlightState(
-        isOn: isOn,
+        isOn: false, // We'll track this state in the provider
         isAvailable: isAvailable,
       );
     } catch (e) {
@@ -27,12 +27,8 @@ class SensorDataSourceImpl implements SensorDataSource {
   @override
   Future<void> toggleFlashlight() async {
     try {
-      final isOn = await TorchLight.isTorchOn();
-      if (isOn) {
-        await TorchLight.disableTorch();
-      } else {
-        await TorchLight.enableTorch();
-      }
+      // Simple toggle - torch_light handles the state internally
+      await TorchLight.toggleTorch();
     } catch (e) {
       throw Exception('Failed to toggle flashlight: $e');
     }

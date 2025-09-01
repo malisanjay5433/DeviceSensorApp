@@ -7,6 +7,8 @@ part 'sensor_provider.g.dart';
 
 @riverpod
 class FlashlightNotifier extends _$FlashlightNotifier {
+  bool _isOn = false;
+
   @override
   Future<FlashlightState> build() async {
     final getFlashlightState = getIt<GetFlashlightState>();
@@ -14,7 +16,10 @@ class FlashlightNotifier extends _$FlashlightNotifier {
     
     return result.fold(
       (failure) => throw Exception(failure.toString()),
-      (flashlightState) => flashlightState,
+      (flashlightState) => FlashlightState(
+        isOn: _isOn,
+        isAvailable: flashlightState.isAvailable,
+      ),
     );
   }
 
@@ -25,7 +30,9 @@ class FlashlightNotifier extends _$FlashlightNotifier {
     result.fold(
       (failure) => throw Exception(failure.toString()),
       (_) {
-        // Refresh the flashlight state after toggling
+        // Toggle the local state
+        _isOn = !_isOn;
+        // Update the state
         ref.invalidateSelf();
       },
     );

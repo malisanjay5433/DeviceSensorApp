@@ -26,28 +26,8 @@ A Flutter application that demonstrates native platform integration using Method
 - **GetIt + Injectable** for dependency injection
 
 ## 📸 Screenshots
-
-### Dashboard Screen
-- Device information with battery status and charging indicator
-- Simulator detection with special "Development Mode" badge
-- Platform-specific icons (Android, iOS, Simulator)
-- Beautiful card-based layout with Material Design 3
-
-### Sensor Info Screen
-- Flashlight control with native MethodChannel integration
-- Real-time status updates with smooth animations
-- Error handling with user-friendly messages
-- Toggle button with visual feedback
-
-## 🛠️ Technologies Used
-
-- **Flutter** - UI Toolkit for cross-platform development
-- **Riverpod** - State management and dependency injection
-- **MethodChannels** - Native platform integration
-- **Dio** - HTTP client for API requests
-- **GetIt + Injectable** - Dependency injection
-- **Lottie** - Beautiful animations
-- **Dartz** - Functional programming (Either type)
+<img width="300" height="2622" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-01 at 20 49 03" src="https://github.com/user-attachments/assets/b80b5ab1-c717-46b1-9aa7-f8640aff87d3" />
+<img width="300" height="2622" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-01 at 20 49 07" src="https://github.com/user-attachments/assets/06380f98-d137-428d-a1ed-f74614cd2288" />
 
 ## 🚀 Getting Started
 
@@ -178,14 +158,6 @@ flutter test --coverage
 - [x] Beautiful animations and UI
 - [x] Simulator detection and handling
 
-### Future Enhancements 🚀
-- [ ] Additional sensor support (gyroscope, accelerometer)
-- [ ] Device performance monitoring
-- [ ] Network connectivity status
-- [ ] Storage information display
-- [ ] Camera integration
-- [ ] Location services
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -193,10 +165,6 @@ flutter test --coverage
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 

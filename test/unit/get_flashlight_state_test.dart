@@ -70,7 +70,7 @@ void main() {
       result.fold(
         (failure) {
           expect(failure, isA<ServerFailure>());
-          expect(failure.message, 'Flashlight not available');
+          expect((failure as ServerFailure).message, 'Flashlight not available');
         },
         (flashlightState) => fail('Should not return success'),
       );
@@ -94,7 +94,7 @@ void main() {
       expect(result, isA<Right<Failure, void>>());
       result.fold(
         (failure) => fail('Should not return failure'),
-        (void result) => expect(result, null),
+        (void result) => expect(result, isNull),
       );
     });
 
@@ -111,7 +111,7 @@ void main() {
       result.fold(
         (failure) {
           expect(failure, isA<ServerFailure>());
-          expect(failure.message, 'Failed to toggle flashlight');
+          expect((failure as ServerFailure).message, 'Failed to toggle flashlight');
         },
         (void result) => fail('Should not return success'),
       );

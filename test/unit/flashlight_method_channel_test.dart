@@ -7,6 +7,10 @@ void main() {
   group('FlashlightMethodChannel', () {
     const MethodChannel channel = MethodChannel('flashlight_channel');
 
+    setUpAll(() {
+      TestWidgetsFlutterBinding.ensureInitialized();
+    });
+
     setUp(() {
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
           .setMockMethodCallHandler(channel, (MethodCall methodCall) async {

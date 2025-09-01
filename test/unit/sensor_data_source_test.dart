@@ -8,6 +8,10 @@ void main() {
     late SensorDataSourceImpl dataSource;
     const MethodChannel channel = MethodChannel('flashlight_channel');
 
+    setUpAll(() {
+      TestWidgetsFlutterBinding.ensureInitialized();
+    });
+
     setUp(() {
       dataSource = SensorDataSourceImpl();
     });

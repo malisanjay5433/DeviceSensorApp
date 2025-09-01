@@ -39,37 +39,40 @@ class _MainTabPageState extends State<MainTabPage> with TickerProviderStateMixin
           color: Theme.of(context).scaffoldBackgroundColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withOpacity(0.3),
               spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, -2),
+              blurRadius: 8,
+              offset: const Offset(0, -3),
             ),
           ],
         ),
-        child: TabBar(
-          controller: _tabController,
-          indicatorColor: Theme.of(context).primaryColor,
-          indicatorWeight: 3,
-          labelColor: Theme.of(context).primaryColor,
-          unselectedLabelColor: Colors.grey[600],
-          labelStyle: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-          ),
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-          tabs: const [
-            Tab(
-              icon: Icon(Icons.dashboard),
-              text: 'Dashboard',
+        child: SafeArea(
+          child: TabBar(
+            controller: _tabController,
+            indicatorColor: Theme.of(context).primaryColor,
+            indicatorWeight: 3,
+            indicatorSize: TabBarIndicatorSize.label,
+            labelColor: Theme.of(context).primaryColor,
+            unselectedLabelColor: Colors.grey[600],
+            labelStyle: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
             ),
-            Tab(
-              icon: Icon(Icons.sensors),
-              text: 'Sensors',
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
             ),
-          ],
+            tabs: const [
+              Tab(
+                icon: Icon(Icons.dashboard_rounded),
+                text: 'Dashboard',
+              ),
+              Tab(
+                icon: Icon(Icons.sensors_rounded),
+                text: 'Sensors',
+              ),
+            ],
+          ),
         ),
       ),
     );

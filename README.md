@@ -28,6 +28,8 @@ A Flutter application that demonstrates native platform integration using Method
 ## 📸 Screenshots
 <img width="300" height="2622" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-01 at 20 49 03" src="https://github.com/user-attachments/assets/b80b5ab1-c717-46b1-9aa7-f8640aff87d3" />
 <img width="300" height="2622" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-01 at 20 49 07" src="https://github.com/user-attachments/assets/06380f98-d137-428d-a1ed-f74614cd2288" />
+<img width="320" height="2220" alt="Screenshot_20250901_234042" src="https://github.com/user-attachments/assets/754082aa-c3f1-4795-85f0-353aeb6a3eb2" />
+<img width="320" height="2220" alt="Screenshot_20250901_234115" src="https://github.com/user-attachments/assets/1fbf90d4-ba07-4342-8919-89c0b567ecb9" />
 
 ## 🚀 Getting Started
 

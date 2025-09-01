@@ -306,42 +306,7 @@ class DashboardPage extends ConsumerWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
-                
-                // Quick Actions
-                Text(
-                  'Quick Actions',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          // TODO: Navigate to sensors page
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Sensors page coming soon!')),
-                          );
-                        },
-                        icon: const Icon(Icons.sensors),
-                        label: const Text('View Sensors'),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          ref.read(deviceInfoNotifierProvider.notifier).refreshDeviceInfo();
-                        },
-                        icon: const Icon(Icons.refresh),
-                        label: const Text('Refresh'),
-                      ),
-                    ),
-                  ],
-                ),
+
               ],
             ),
           ),

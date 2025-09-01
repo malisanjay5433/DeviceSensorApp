@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:devicesensorapp/core/di/injection.dart';
-import 'package:devicesensorapp/presentation/pages/dashboard_page.dart';
+import 'package:devicesensorapp/presentation/pages/main_tab_page.dart';
 
 void main() {
   configureDependencies();
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const DashboardPage(),
+      home: const MainTabPage(),
       debugShowCheckedModeBanner: false,
     );
   }

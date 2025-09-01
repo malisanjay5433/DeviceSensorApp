@@ -16,12 +16,6 @@ class SensorInfoPage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Sensor Information'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () => ref.invalidate(flashlightNotifierProvider),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

@@ -5,7 +5,6 @@ import 'package:devicesensorapp/presentation/providers/device_info_provider.dart
 import 'package:devicesensorapp/presentation/widgets/device_info_card.dart';
 import 'package:devicesensorapp/presentation/widgets/loading_widget.dart';
 import 'package:devicesensorapp/presentation/widgets/error_widget.dart' as custom;
-import 'package:devicesensorapp/presentation/pages/sensor_info_page.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
@@ -19,17 +18,6 @@ class DashboardPage extends ConsumerWidget {
         title: const Text('Dashboard'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.sensors),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SensorInfoPage(),
-                ),
-              );
-            },
-            tooltip: 'Sensor Info',
-          ),
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () => ref.read(deviceInfoNotifierProvider.notifier).refreshDeviceInfo(),

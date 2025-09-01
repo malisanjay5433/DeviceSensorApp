@@ -3,9 +3,13 @@ import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
 import 'package:devicesensorapp/core/network/network_info.dart';
 import 'package:devicesensorapp/data/datasources/device_sensor_remote_datasource.dart';
+import 'package:devicesensorapp/data/datasources/device_info_datasource.dart';
 import 'package:devicesensorapp/data/repositories/device_sensor_repository_impl.dart';
+import 'package:devicesensorapp/data/repositories/device_info_repository_impl.dart';
 import 'package:devicesensorapp/domain/repositories/device_sensor_repository.dart';
+import 'package:devicesensorapp/domain/repositories/device_info_repository.dart';
 import 'package:devicesensorapp/domain/usecases/get_device_sensors.dart';
+import 'package:devicesensorapp/domain/usecases/get_device_info.dart';
 
 import 'injection.config.dart';
 
@@ -35,5 +39,18 @@ abstract class RegisterModule {
   @lazySingleton
   GetDeviceSensors get getDeviceSensors => GetDeviceSensors(
         getIt<DeviceSensorRepository>(),
+      );
+
+  @lazySingleton
+  DeviceInfoDataSource get deviceInfoDataSource => DeviceInfoDataSourceImpl();
+
+  @lazySingleton
+  DeviceInfoRepository get deviceInfoRepository => DeviceInfoRepositoryImpl(
+        dataSource: getIt<DeviceInfoDataSource>(),
+      );
+
+  @lazySingleton
+  GetDeviceInfo get getDeviceInfo => GetDeviceInfo(
+        getIt<DeviceInfoRepository>(),
       );
 }

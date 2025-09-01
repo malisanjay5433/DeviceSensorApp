@@ -55,7 +55,6 @@ dependencies:
   battery_plus: ^3.0.2
 
   # Sensors & Hardware
-  sensors_plus: ^4.0.2
   torch_light: ^1.0.0
 
   # The following adds the Cupertino Icons font to your application.

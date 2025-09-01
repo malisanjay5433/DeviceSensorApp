@@ -4,12 +4,16 @@ import 'package:dio/dio.dart';
 import 'package:devicesensorapp/core/network/network_info.dart';
 import 'package:devicesensorapp/data/datasources/device_sensor_remote_datasource.dart';
 import 'package:devicesensorapp/data/datasources/device_info_datasource.dart';
+import 'package:devicesensorapp/data/datasources/sensor_datasource.dart';
 import 'package:devicesensorapp/data/repositories/device_sensor_repository_impl.dart';
 import 'package:devicesensorapp/data/repositories/device_info_repository_impl.dart';
+import 'package:devicesensorapp/data/repositories/sensor_repository_impl.dart';
 import 'package:devicesensorapp/domain/repositories/device_sensor_repository.dart';
 import 'package:devicesensorapp/domain/repositories/device_info_repository.dart';
+import 'package:devicesensorapp/domain/repositories/sensor_repository.dart';
 import 'package:devicesensorapp/domain/usecases/get_device_sensors.dart';
 import 'package:devicesensorapp/domain/usecases/get_device_info.dart';
+import 'package:devicesensorapp/domain/usecases/get_flashlight_state.dart';
 
 import 'injection.config.dart';
 
@@ -52,5 +56,23 @@ abstract class RegisterModule {
   @lazySingleton
   GetDeviceInfo get getDeviceInfo => GetDeviceInfo(
         getIt<DeviceInfoRepository>(),
+      );
+
+  @lazySingleton
+  SensorDataSource get sensorDataSource => SensorDataSourceImpl();
+
+  @lazySingleton
+  SensorRepository get sensorRepository => SensorRepositoryImpl(
+        dataSource: getIt<SensorDataSource>(),
+      );
+
+  @lazySingleton
+  GetFlashlightState get getFlashlightState => GetFlashlightState(
+        getIt<SensorRepository>(),
+      );
+
+  @lazySingleton
+  ToggleFlashlight get toggleFlashlight => ToggleFlashlight(
+        getIt<SensorRepository>(),
       );
 }

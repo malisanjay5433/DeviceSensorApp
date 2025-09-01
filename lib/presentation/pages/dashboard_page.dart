@@ -82,6 +82,37 @@ class DashboardPage extends ConsumerWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      // Development Mode Indicator
+                      if (deviceInfo.deviceName.toLowerCase().contains('simulator') || 
+                          deviceInfo.deviceName.toLowerCase().contains('emulator'))
+                        Container(
+                          margin: const EdgeInsets.only(top: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.orange.withOpacity(0.3)),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.developer_mode,
+                                size: 16,
+                                color: Colors.orange[700],
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                'Development Mode',
+                                style: TextStyle(
+                                  color: Colors.orange[700],
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -115,10 +146,79 @@ class DashboardPage extends ConsumerWidget {
                 DeviceInfoCard(
                   title: 'Platform',
                   value: deviceInfo.platform,
-                  icon: Icons.computer,
-                  color: Colors.orange,
+                  icon: deviceInfo.platform.toLowerCase().contains('android') 
+                      ? Icons.android 
+                      : deviceInfo.platform.toLowerCase().contains('ios')
+                          ? Icons.phone_iphone
+                          : Icons.computer,
+                  color: deviceInfo.platform.toLowerCase().contains('android') 
+                      ? Colors.green
+                      : deviceInfo.platform.toLowerCase().contains('ios')
+                          ? Colors.blue
+                          : Colors.orange,
                 ),
                 const SizedBox(height: 12),
+                
+                // Simulator Info Card (only shown in simulator)
+                if (deviceInfo.deviceName.toLowerCase().contains('simulator') || 
+                    deviceInfo.deviceName.toLowerCase().contains('emulator'))
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.amber.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.amber.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.sim_card,
+                            color: Colors.amber[700],
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Simulator Environment',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.amber[700],
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Running in ${deviceInfo.platform}',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: Colors.amber[600],
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'Battery level is simulated for testing',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Colors.amber[600],
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                if (deviceInfo.deviceName.toLowerCase().contains('simulator') || 
+                    deviceInfo.deviceName.toLowerCase().contains('emulator'))
+                  const SizedBox(height: 12),
                 
                 // Battery Card with Animation
                 Container(
@@ -163,12 +263,34 @@ class DashboardPage extends ConsumerWidget {
                               ),
                             ),
                             const SizedBox(height: 4),
-                            Text(
-                              '${deviceInfo.batteryLevel}%',
-                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: deviceInfo.batteryLevel > 20 ? Colors.green : Colors.red,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  '${deviceInfo.batteryLevel}%',
+                                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                    color: deviceInfo.batteryLevel > 20 ? Colors.green : Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                if (deviceInfo.deviceName.toLowerCase().contains('simulator') || 
+                                    deviceInfo.deviceName.toLowerCase().contains('emulator'))
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 8),
+                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: Colors.amber.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      'SIM',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.amber[700],
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
                             const SizedBox(height: 8),
                             LinearProgressIndicator(

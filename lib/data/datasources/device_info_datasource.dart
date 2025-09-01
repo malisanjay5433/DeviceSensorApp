@@ -18,17 +18,34 @@ class DeviceInfoDataSourceImpl implements DeviceInfoDataSource {
       String deviceName;
       String osVersion;
       String platform;
+      bool isSimulator = false;
 
       if (Platform.isAndroid) {
         final androidInfo = await _deviceInfoPlugin.androidInfo;
         deviceName = androidInfo.model;
         osVersion = 'Android ${androidInfo.version.release}';
-        platform = 'Android';
+        
+        // Check if running on emulator
+        isSimulator = androidInfo.isPhysicalDevice == false;
+        if (isSimulator) {
+          deviceName = 'Android Emulator (${androidInfo.model})';
+          platform = 'Android Simulator';
+        } else {
+          platform = 'Android Device';
+        }
       } else if (Platform.isIOS) {
         final iosInfo = await _deviceInfoPlugin.iosInfo;
         deviceName = iosInfo.name;
         osVersion = 'iOS ${iosInfo.systemVersion}';
-        platform = 'iOS';
+        
+        // Check if running on simulator
+        isSimulator = iosInfo.isPhysicalDevice == false;
+        if (isSimulator) {
+          deviceName = 'iOS Simulator (${iosInfo.name})';
+          platform = 'iOS Simulator';
+        } else {
+          platform = 'iOS Device';
+        }
       } else if (Platform.isMacOS) {
         final macInfo = await _deviceInfoPlugin.macOsInfo;
         deviceName = macInfo.computerName;
@@ -51,9 +68,24 @@ class DeviceInfoDataSourceImpl implements DeviceInfoDataSource {
       }
 
       // Get battery information
-      final batteryLevel = await _battery.batteryLevel;
-      final batteryState = await _battery.batteryState;
-      final isCharging = batteryState == BatteryState.charging;
+      int batteryLevel;
+      bool isCharging;
+      
+      try {
+        batteryLevel = await _battery.batteryLevel;
+        final batteryState = await _battery.batteryState;
+        isCharging = batteryState == BatteryState.charging;
+        
+        // For simulators, show a mock battery level
+        if (isSimulator) {
+          batteryLevel = 85; // Mock battery level for simulator
+          isCharging = false;
+        }
+      } catch (e) {
+        // Fallback for battery info
+        batteryLevel = isSimulator ? 85 : 0;
+        isCharging = false;
+      }
 
       return DeviceInfo(
         deviceName: deviceName,

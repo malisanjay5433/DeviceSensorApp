@@ -27,8 +27,8 @@ class SensorDataSourceImpl implements SensorDataSource {
   @override
   Future<void> toggleFlashlight() async {
     try {
-      // Simple toggle - torch_light handles the state internally
-      await TorchLight.toggleTorch();
+      // Use enable/disable methods for torch_light
+      await TorchLight.enableTorch();
     } catch (e) {
       throw Exception('Failed to toggle flashlight: $e');
     }

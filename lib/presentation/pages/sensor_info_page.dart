@@ -139,17 +139,25 @@ class SensorInfoPage extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        ElevatedButton.icon(
-                          onPressed: flashlightState.isAvailable
-                              ? () => ref.read(flashlightNotifierProvider.notifier).toggleFlashlight()
-                              : null,
-                          icon: Icon(
-                            flashlightState.isOn ? Icons.flashlight_off : Icons.flashlight_on,
-                          ),
-                          label: Text(flashlightState.isOn ? 'Turn Off' : 'Turn On'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: flashlightState.isOn ? Colors.red : Colors.green,
-                            foregroundColor: Colors.white,
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          child: ElevatedButton.icon(
+                            onPressed: flashlightState.isAvailable
+                                ? () => ref.read(flashlightNotifierProvider.notifier).toggleFlashlight()
+                                : null,
+                            icon: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              child: Icon(
+                                flashlightState.isOn ? Icons.flashlight_off : Icons.flashlight_on,
+                                key: ValueKey(flashlightState.isOn),
+                              ),
+                            ),
+                            label: Text(flashlightState.isOn ? 'Turn Off' : 'Turn On'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: flashlightState.isOn ? Colors.red : Colors.green,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            ),
                           ),
                         ),
                       ],

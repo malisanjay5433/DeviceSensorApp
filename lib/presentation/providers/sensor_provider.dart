@@ -8,6 +8,7 @@ part 'sensor_provider.g.dart';
 @riverpod
 class FlashlightNotifier extends _$FlashlightNotifier {
   bool _isOn = false;
+  bool _isToggling = false;
 
   @override
   Future<FlashlightState> build() async {
@@ -24,17 +25,39 @@ class FlashlightNotifier extends _$FlashlightNotifier {
   }
 
   Future<void> toggleFlashlight() async {
-    final toggleFlashlight = getIt<ToggleFlashlight>();
-    final result = await toggleFlashlight();
+    if (_isToggling) return; // Prevent multiple simultaneous toggles
     
-    result.fold(
-      (failure) => throw Exception(failure.toString()),
-      (_) {
-        // Toggle the local state
-        _isOn = !_isOn;
-        // Update the state
-        ref.invalidateSelf();
-      },
-    );
+    _isToggling = true;
+    
+    try {
+      // Update UI immediately for better UX
+      final currentState = await future;
+      state = AsyncValue.data(FlashlightState(
+        isOn: !currentState.isOn,
+        isAvailable: currentState.isAvailable,
+      ));
+      
+      final toggleFlashlight = getIt<ToggleFlashlight>();
+      final result = await toggleFlashlight();
+      
+      result.fold(
+        (failure) {
+          // Revert state on failure
+          state = AsyncValue.data(FlashlightState(
+            isOn: currentState.isOn,
+            isAvailable: currentState.isAvailable,
+          ));
+          throw Exception(failure.toString());
+        },
+        (_) {
+          // Update the local state
+          _isOn = !_isOn;
+        },
+      );
+    } finally {
+      _isToggling = false;
+    }
   }
+
+  bool get isToggling => _isToggling;
 }

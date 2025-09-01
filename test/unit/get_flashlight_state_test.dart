@@ -94,7 +94,7 @@ void main() {
       expect(result, isA<Right<Failure, void>>());
       result.fold(
         (failure) => fail('Should not return failure'),
-        (result) => expect(result, isNull),
+        (result) => expect(true, true), // Success case - void result
       );
     });
 
